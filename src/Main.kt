@@ -1,3 +1,5 @@
+import 数组.isValidSudoku
+
 fun main(args: Array<String>) {
     val board = arrayOf(
         arrayOf('8', '3', '.', '.', '7', '.', '.', '.', '.'),
