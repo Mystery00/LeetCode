@@ -1,4 +1,6 @@
 import 数组.isValidSudoku
+import 链表.ListNode
+import 链表.反转链表
 
 fun main(args: Array<String>) {
     val board = arrayOf(
@@ -38,4 +40,19 @@ fun main(args: Array<String>) {
     println(longestCommonPrefix(arrayOf("flower", "flow", "flight")))
     println(longestCommonPrefix(arrayOf("dog", "racecar", "car")))
     println(longestCommonPrefix(arrayOf("aaa", "aa", "aaaa")))
+
+    val head = ListNode(1)
+    val node2 = ListNode(2)
+    val node3 = ListNode(3)
+    val node4 = ListNode(4)
+    val node5 = ListNode(5)
+    head.next = node2
+    node2.next = node3
+    node3.next = node4
+    node4.next = node5
+    var node = 反转链表().reverseList1(head)
+    while (node != null) {
+        print("${node.`val`} ")
+        node = node.next
+    }
 }
