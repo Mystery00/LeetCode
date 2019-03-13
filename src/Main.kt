@@ -1,4 +1,5 @@
 import 数组.isValidSudoku
+import 树.TreeNode
 import 链表.ListNode
 import 链表.反转链表
 
@@ -55,4 +56,16 @@ fun main(args: Array<String>) {
         print("${node.`val`} ")
         node = node.next
     }
+    println("")
+
+    val root = TreeNode(10)
+    val treeNode5 = TreeNode(5)
+    val treeNode15 = TreeNode(15)
+    val treeNode6 = TreeNode(6)
+    val treeNode20 = TreeNode(20)
+    root.left = treeNode5
+    root.right = treeNode15
+    treeNode15.left = treeNode6
+    treeNode15.right = treeNode20
+    println(isValidBST(root))
 }
