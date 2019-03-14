@@ -12,24 +12,41 @@ import 树.TreeNode
  * https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/7/trees/48/
  */
 fun isValidBST(root: TreeNode?): Boolean {
-    fun isValidTree(child: TreeNode?, parentVal: Int, compare: (Int, Int) -> Boolean): Boolean {
-        if (child == null)
-            return true
-        val left = if (child.left != null)
-            isValidTree(child.left, child.`val`) { c, parent -> c < parent }
-        else
-            true
-        val right = if (child.right != null)
-            isValidTree(child.right, child.`val`) { c, parent -> c > parent }
-        else
-            true
-        return compare(child.`val`, parentVal) && left && right
-    }
     if (root == null)
         return true
-    return isValidTree(root, 1) { _, _ -> true }
+    fun isValidTree(now: TreeNode?, min: Long, max: Long): Boolean {
+        if (now == null)
+            return true
+        if (now.`val` !in (min + 1)..(max - 1)) return false
+        return isValidTree(now.left, min, now.`val`.toLong()) && isValidTree(now.right, now.`val`.toLong(), max)
+    }
+    return isValidTree(root, Long.MIN_VALUE, Long.MAX_VALUE)
+}
+
+fun isValidBST1(root: TreeNode?): Boolean {
+    if (root == null)
+        return true
+    val list = ArrayList<Int>()
+    /**
+     * 中序遍历
+     */
+    fun centerPrint(root: TreeNode?) {
+        if (root == null)
+            return
+        centerPrint(root.left)
+        list.add(root.`val`)
+        centerPrint(root.right)
+    }
+    centerPrint(root)
+
+    for (i in 1 until list.size)
+        if (list[i - 1] >= list[i])
+            return false
+    return true
 }
 /**
  * 解题分析：
- * TODO
+ * 两种解题思路：
+ * 1. 根据二叉搜索树的性质，来递归进行判断
+ * 2. 使用中序遍历将二叉树转换成数组，然后判断数组是否是有序
  */
